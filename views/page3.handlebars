@@ -15,13 +15,13 @@
 
   <form action="/setDogName" method="POST">
     <label for="firstname">First name:</label>
-    <input type="text" name="firstname" value="the">
+    <input type="text" name="firstname" value="">
     <label for="lastname">Last Name: </label>
-    <input type="text" name="lastname" value="dog">
+    <input type="text" name="lastname" value="">
     <label for="breed">Breed: </label>
-    <input type="text" name="breed" value="doggy">
+    <input type="text" name="breed" value="">
     <label for="age">Age:</label>
-    <input type="number" name="age" value="1">
+    <input type="number" name="age" value="">
     <input type="submit" value="submit">
   </form>
   
@@ -29,7 +29,7 @@
   <br/>
   
   <!-- /findDogByName?name=The Dog -->
-  <form action="findDogByName" method="GET">
+  <form action="/findDogByName" method="GET">
     <label for="name">Name to search for:</label>
     <input type="text" name="name" value="">
     <input type="submit" value="Submit">

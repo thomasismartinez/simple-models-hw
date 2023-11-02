@@ -57,7 +57,8 @@ const hostPage4 = async (req, res) => {
 const getName = (req, res) => res.json({ name: lastAdded.name });
 
 const setName = async (req, res) => {
-  if (!req.body.firstname || !req.body.lastname || !req.body.beds) { // req.body is used for POST parameters
+  // req.body is used for POST parameters
+  if (!req.body.firstname || !req.body.lastname || !req.body.beds) {
     return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
   }
 
@@ -124,16 +125,18 @@ const notFound = (req, res) => {
 
 // DOG
 const setDogName = async (req, res) => {
-  if (!req.body.firstname || !req.body.lastname || !req.body.breed || !req.body.age) { // req.body is used for POST parameters
+  // req.body is used for POST parameters
+  if (!req.body.firstname || !req.body.lastname || !req.body.breed || !req.body.age) {
     return res.status(400).json({ error: 'firstname, lastname, breed, and age are all required' });
   }
 
   // for debug
-  console.log(`name: ${req.body.firstname} ${req.body.lastname}, breed: ${req.body.breed}, age: ${req.body.age}`)
+  console.log(`name: ${req.body.firstname} ${req.body.lastname}, breed: ${req.body.breed}, age: ${req.body.age}`);
 
   const dogData = {
     name: `${req.body.firstname} ${req.body.lastname}`,
-    bedsOwned: req.body.age,
+    breed: req.body.breed,
+    age: req.body.age,
   };
 
   const newDog = new Dog(dogData);
@@ -154,14 +157,15 @@ const setDogName = async (req, res) => {
   }
 };
 
-const findDogByName = async (req, res) => {
+const searchDogName = async (req, res) => {
   if (!req.query.name) { // req.query is used for GET parameters
     return res.status(400).json({ error: 'Name is required to perform a search' });
   }
 
+  console.log(`getting dog with name: ${req.query.name}`);
+
   try {
-    // with update
-    const doc = await Dog.findOneAndUpdate({ name: req.query.name }, { name: req.query.name }, { $inc: { age: 1 } });
+    const doc = await Dog.findOneAndUpdate({ name: req.query.name }, { $inc: { age: 1 } });
 
     if (!doc) { // no dog with that name in database
       return res.status(404).json({ error: 'dog not found' });
@@ -186,5 +190,5 @@ module.exports = {
   searchName,
   notFound,
   setDogName,
-  findDogByName
+  searchDogName,
 };

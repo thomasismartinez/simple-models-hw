@@ -18,7 +18,7 @@ const router = (app) => {
 
   // Dog
   app.post('/setDogName', controllers.setDogName);
-  app.get('/findDogByName', controllers.findDogByName);
+  app.get('/findDogByName', controllers.searchDogName);
 };
 
 // export the router function
